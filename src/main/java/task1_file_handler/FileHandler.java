@@ -1,3 +1,5 @@
+package task1_file_handler;
+
 import java.nio.file.*;
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +11,8 @@ public class FileHandler {
     public static void createFile(String fileName, String content) {
         try {
             Path path = Paths.get(fileName);
-            Files.writeString(path, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            // Convert the string to bytes manually
+            Files.write(path, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             System.out.println("✅ File created successfully: " + fileName);
         } catch (IOException e) {
             System.out.println("❌ Error creating file: " + e.getMessage());
@@ -35,7 +38,8 @@ public class FileHandler {
     public static void appendToFile(String fileName, String content) {
         try {
             Path path = Paths.get(fileName);
-            Files.writeString(path, "\n" + content, StandardOpenOption.APPEND);
+            // Convert the appended string to bytes
+            Files.write(path, ("\n" + content).getBytes(), StandardOpenOption.APPEND);
             System.out.println("✅ Data appended successfully.");
         } catch (IOException e) {
             System.out.println("❌ Error appending to file: " + e.getMessage());
